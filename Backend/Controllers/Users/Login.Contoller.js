@@ -26,7 +26,8 @@ const LoginController=AsyncHandler(async(req,res)=>{
                 },process.env.JWT_Secret_Key)
 
                 res.cookie("token",token,{
-                    httpOnly:true
+                    httpOnly:true,
+                    samesite:"none"
                 })
 
                 res.status(201).json({message:"User Logged in",token})
