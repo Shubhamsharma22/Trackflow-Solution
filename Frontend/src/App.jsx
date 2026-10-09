@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-route
 import RegisterUser from './Pages/registerUser.jsx'
 import LoginPage from './Pages/loginPage.jsx'
 import CreateOrganization from './Pages/createOrganization.jsx'
-import CreateTracking from './Pages/CreateTracking.jsx'
+import CreateTracking from './Pages/createTracking.jsx'
 import SideBar from './Pages/SideBar.jsx'
 import Dashboard from './Display/Dashboard.jsx'
 import Members from './Pages/Members.jsx'
