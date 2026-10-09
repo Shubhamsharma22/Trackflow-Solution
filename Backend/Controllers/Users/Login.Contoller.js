@@ -27,7 +27,8 @@ const LoginController=AsyncHandler(async(req,res)=>{
 
                 res.cookie("token",token,{
                     httpOnly:true,
-                    samesite:"none"
+                    samesite:"none",
+                    secure:true
                 })
 
                 res.status(201).json({message:"User Logged in",token})
