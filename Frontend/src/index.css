@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-slate-50: #f3f7fb;
+  --color-slate-100: #e8eef6;
+  --color-slate-200: #d3deeb;
+  --color-slate-300: #b4c4d7;
+  --color-slate-400: #8498b1;
+  --color-slate-500: #637891;
+  --color-slate-600: #485f79;
+  --color-slate-700: #334b68;
+  --color-slate-800: #203854;
+  --color-slate-900: #172b43;
+  --color-slate-950: #0c1b2d;
+}
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #203854;
+  background: #f3f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  accent-color: #0f9f91;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 88% 4%, rgb(20 184 166 / 9%), transparent 32rem),
+    radial-gradient(ellipse at 8% 20%, rgb(56 99 165 / 8%), transparent 30rem),
+    #f3f7fb;
+}
+
+::selection {
+  color: #fff;
+  background: #0f766e;
+}
+
+input,
+select,
+textarea {
+  accent-color: #0f9f91;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline-color: #0f9f91;
+}
+
+section.bg-white,
+form.bg-white {
+  border-color: #d4e0ed;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #fff 0%, #fafdff 100%);
+  box-shadow: 0 10px 28px rgb(28 57 89 / 6%);
+}
+
+button[class*="bg-slate-800"],
+button[class*="bg-slate-700"] {
+  border-radius: 0.75rem;
+  background-image: linear-gradient(115deg, #24456b, #087f83);
+  box-shadow: 0 5px 14px rgb(24 58 86 / 17%);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+button[class*="bg-slate-800"]:hover:not(:disabled),
+button[class*="bg-slate-700"]:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 18px rgb(24 58 86 / 22%);
+}
+
+tbody tr {
+  transition: background-color 160ms ease;
+}
+
+tbody tr:hover {
+  background-color: #f0f8fa;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0f9f91;
+  box-shadow: 0 0 0 3px rgb(15 159 145 / 13%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
