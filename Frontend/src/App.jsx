@@ -11,6 +11,7 @@ import ShipmentPage from './Pages/ShipmentPage.jsx'
 import Organization from './Pages/Organization.jsx'
 import Side from './Components/Side.jsx'
 import { useEffect, useState } from 'react'
+import { apiUrl } from './api.js'
 
 const WorkspaceLayout = ({ children }) => {
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ const WorkspaceLayout = ({ children }) => {
     setLogoutError('')
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/logout', {
+      const response = await fetch(apiUrl('/api/auth/logout'), {
         method: 'POST',
         credentials: 'include',
       })
@@ -69,7 +70,7 @@ const App = () => {
 
     async function fetchOrganizations() {
       try {
-        const profileResponse = await fetch('http://localhost:3000/api/auth/getProfile', {
+        const profileResponse = await fetch(apiUrl('/api/auth/getProfile'), {
           credentials: 'include',
         })
         const profileResult = await profileResponse.json()
@@ -84,7 +85,7 @@ const App = () => {
           organizationList = organization && typeof organization === 'object' ? [organization] : []
         } else {
           const organizationsResponse = await fetch(
-            'http://localhost:3000/api/owner/getOrganizations',
+            apiUrl('/api/owner/getOrganizations'),
             { credentials: 'include' },
           )
           const organizationsResult = await organizationsResponse.json()

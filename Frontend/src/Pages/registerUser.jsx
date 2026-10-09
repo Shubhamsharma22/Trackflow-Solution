@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { apiUrl } from '../api.js'
 
 const RegisterUser = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -13,7 +14,7 @@ const RegisterUser = () => {
     const formData = new FormData(form)
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/register', {
+      const response = await fetch(apiUrl('/api/auth/register'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

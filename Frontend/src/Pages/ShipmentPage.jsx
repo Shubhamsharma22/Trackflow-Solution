@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { apiUrl } from '../api.js'
 
 const ShipmentPage = () => {
   const { id } = useParams()
@@ -11,7 +12,7 @@ const ShipmentPage = () => {
   useEffect(() => {
     async function loadShipment() {
       try {
-        const shipmentResponse = await fetch('http://localhost:3000/api/owner/shipments', {
+        const shipmentResponse = await fetch(apiUrl('/api/owner/shipments'), {
           credentials: 'include',
         })
         const shipmentResult = await shipmentResponse.json()
@@ -27,7 +28,7 @@ const ShipmentPage = () => {
         setShipment(selectedShipment)
 
         const eventsResponse = await fetch(
-          `http://localhost:3000/api/shipments/${id}/tracking-events`,
+          apiUrl(`/api/shipments/${id}/tracking-events`),
           { credentials: 'include' },
         )
         const eventsResult = await eventsResponse.json()

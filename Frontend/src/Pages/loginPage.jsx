@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
+import { apiUrl } from '../api.js'
 
 const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -18,7 +19,7 @@ const LoginPage = () => {
     const formData = new FormData(form)
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
+      const response = await fetch(apiUrl('/api/auth/login'), {
         method: 'POST',
         credentials:'include',
         headers: {

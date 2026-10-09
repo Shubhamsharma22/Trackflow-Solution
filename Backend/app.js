@@ -12,8 +12,19 @@ import swaggerJsdoc from "swagger-jsdoc"
 
 const app = express()
 
+const frontendOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map((origin) => origin.trim().replace(/\/+$/, ""))
+  .filter(Boolean)
+
+if (process.env.NODE_ENV !== "production") {
+  frontendOrigins.push("http://localhost:5173")
+}
+
 app.use(cors({
-  origin: "http://localhost:5173", // use the origin serving your frontend
+  origin: (origin, callback) => {
+    callback(null, !origin || frontendOrigins.includes(origin))
+  },
   credentials: true,
 }))
 

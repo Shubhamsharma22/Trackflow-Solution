@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { apiUrl } from '../api.js'
 
 const inputClassName =
   'mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200'
@@ -13,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     async function loadProfile() {
       try {
-        const response = await fetch('http://localhost:3000/api/auth/getProfile', {
+        const response = await fetch(apiUrl('/api/auth/getProfile'), {
           credentials: 'include',
         })
         const result = await response.json()
@@ -42,7 +43,7 @@ const Profile = () => {
     const formData = new FormData(event.currentTarget)
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/updateProfile', {
+      const response = await fetch(apiUrl('/api/auth/updateProfile'), {
         method: 'PUT',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

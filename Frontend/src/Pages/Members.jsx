@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { apiUrl } from '../api.js'
 
 const initialMemberForm = {
   UserName: '',
@@ -19,7 +20,7 @@ const Members = () => {
   async function loadMembers() {
     try {
       const organizationsResponse = await fetch(
-        'http://localhost:3000/api/owner/getOrganizations',
+        apiUrl('/api/owner/getOrganizations'),
         { credentials: 'include' },
       )
       const organizationsResult = await organizationsResponse.json()
@@ -37,7 +38,7 @@ const Members = () => {
       const memberResults = await Promise.all(
         organizationsList.map(async (organization) => {
           const response = await fetch(
-            `http://localhost:3000/api/owner/organizations/${organization._id}/members`,
+            apiUrl(`/api/owner/organizations/${organization._id}/members`),
             { credentials: 'include' },
           )
           const result = await response.json()
@@ -78,7 +79,7 @@ const Members = () => {
     setSubmitting(true)
 
     try {
-      const response = await fetch('http://localhost:3000/api/owner/createMember', {
+      const response = await fetch(apiUrl('/api/owner/createMember'), {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -115,7 +116,7 @@ const Members = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/owner/deleteMember/${member._id}`,
+        apiUrl(`/api/owner/deleteMember/${member._id}`),
         { method: 'DELETE', credentials: 'include' },
       )
       const result = await response.json()

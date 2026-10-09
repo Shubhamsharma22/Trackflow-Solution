@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { apiUrl } from '../api.js'
 
 const statusOptions = ['In Transit', 'Picked Up', 'Delayed', 'Delivered']
 
@@ -28,7 +29,7 @@ const CreateTracking = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/member/shipments/${shipment._id}/tracking-events`,
+        apiUrl(`/api/member/shipments/${shipment._id}/tracking-events`),
         { credentials: 'include' },
       )
       const result = await response.json()
@@ -61,8 +62,8 @@ const CreateTracking = () => {
     try {
       const response = await fetch(
         editingEventId
-          ? `http://localhost:3000/api/member/tracking-events/${editingEventId}`
-          : 'http://localhost:3000/api/member/tracking-events',
+          ? apiUrl(`/api/member/tracking-events/${editingEventId}`)
+          : apiUrl('/api/member/tracking-events'),
         {
           method: editingEventId ? 'PUT' : 'POST',
           credentials: 'include',
@@ -120,7 +121,7 @@ const CreateTracking = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/member/tracking-events/${trackingEvent._id}`,
+        apiUrl(`/api/member/tracking-events/${trackingEvent._id}`),
         { method: 'DELETE', credentials: 'include' },
       )
       const result = await response.json()
@@ -147,7 +148,7 @@ const CreateTracking = () => {
       console.log('Loading shipments...')
 
       try {
-        const response = await fetch('http://localhost:3000/api/member/shipments', {
+        const response = await fetch(apiUrl('/api/member/shipments'), {
           credentials: 'include',
         })
         const result = await response.json()
