@@ -12,7 +12,7 @@ import swaggerJsdoc from "swagger-jsdoc"
 
 const app = express()
 
-const frontendOrigins = (process.env.FRONTEND_URL || "")
+const frontendOrigins = (process.env.FRONTEND_URL || "https://trackflow-solution.onrender.com")
   .split(",")
   .map((origin) => origin.trim().replace(/\/+$/, ""))
   .filter(Boolean)
