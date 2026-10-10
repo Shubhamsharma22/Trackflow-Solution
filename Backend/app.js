@@ -12,29 +12,8 @@ import swaggerJsdoc from "swagger-jsdoc"
 
 const app = express()
 
-const frontendOrigins = (
-  process.env.FRONTEND_URL || 
-  "https://trackflow-solution-1.onrender.com,https://trackflow-solution.onrender.com"
-)
-  .split(",")
-  .map((origin) => origin.trim().replace(/\/+$/, ""))
-  .filter(Boolean)
-
-if (process.env.NODE_ENV !== "production") {
-  frontendOrigins.push("http://localhost:5173")
-}
-
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow server-to-server / non-browser requests without origin
-    if (!origin) return callback(null, true)
-
-    if (frontendOrigins.includes(origin)) {
-      return callback(null, true)
-    }
-
-    return callback(new Error(`CORS blocked for origin: ${origin}`))
-  },
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 }))
 
