@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { apiUrl } from '../api.js'
+import { authFetch } from '../api.js'
 
 const statusOptions = ['In Transit', 'Picked Up', 'Delayed', 'Delivered']
 
@@ -28,10 +28,7 @@ const CreateTracking = () => {
     }
 
     try {
-      const response = await fetch(
-        apiUrl(`/api/member/shipments/${shipment._id}/tracking-events`),
-        { credentials: 'include' },
-      )
+      const response = await authFetch(`/api/member/shipments/${shipment._id}/tracking-events`)
       const result = await response.json()
 
       if (!response.ok) {
@@ -60,13 +57,12 @@ const CreateTracking = () => {
     }
 
     try {
-      const response = await fetch(
+      const response = await authFetch(
         editingEventId
-          ? apiUrl(`/api/member/tracking-events/${editingEventId}`)
-          : apiUrl('/api/member/tracking-events'),
+          ? `/api/member/tracking-events/${editingEventId}`
+          : '/api/member/tracking-events',
         {
           method: editingEventId ? 'PUT' : 'POST',
-          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(eventData),
         },
@@ -120,10 +116,7 @@ const CreateTracking = () => {
     setFormMessage('')
 
     try {
-      const response = await fetch(
-        apiUrl(`/api/member/tracking-events/${trackingEvent._id}`),
-        { method: 'DELETE', credentials: 'include' },
-      )
+      const response = await authFetch(`/api/member/tracking-events/${trackingEvent._id}`, { method: 'DELETE' })
       const result = await response.json()
 
       if (!response.ok) {
@@ -148,9 +141,7 @@ const CreateTracking = () => {
       console.log('Loading shipments...')
 
       try {
-        const response = await fetch(apiUrl('/api/member/shipments'), {
-          credentials: 'include',
-        })
+        const response = await authFetch('/api/member/shipments')
         const result = await response.json()
 
         console.log('Shipments API response:', response.status, result)

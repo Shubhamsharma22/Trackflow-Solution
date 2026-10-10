@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { apiUrl } from '../api.js'
+import { authFetch } from '../api.js'
 
 const initialMemberForm = {
   UserName: '',
@@ -19,10 +19,7 @@ const Members = () => {
 
   async function loadMembers() {
     try {
-      const organizationsResponse = await fetch(
-        apiUrl('/api/owner/getOrganizations'),
-        { credentials: 'include' },
-      )
+      const organizationsResponse = await authFetch('/api/owner/getOrganizations')
       const organizationsResult = await organizationsResponse.json()
 
       if (!organizationsResponse.ok) {
@@ -37,10 +34,7 @@ const Members = () => {
 
       const memberResults = await Promise.all(
         organizationsList.map(async (organization) => {
-          const response = await fetch(
-            apiUrl(`/api/owner/organizations/${organization._id}/members`),
-            { credentials: 'include' },
-          )
+          const response = await authFetch(`/api/owner/organizations/${organization._id}/members`)
           const result = await response.json()
 
           if (!response.ok) {
@@ -79,9 +73,8 @@ const Members = () => {
     setSubmitting(true)
 
     try {
-      const response = await fetch(apiUrl('/api/owner/createMember'), {
+      const response = await authFetch('/api/owner/createMember', {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -115,10 +108,7 @@ const Members = () => {
     setMessage('')
 
     try {
-      const response = await fetch(
-        apiUrl(`/api/owner/deleteMember/${member._id}`),
-        { method: 'DELETE', credentials: 'include' },
-      )
+      const response = await authFetch(`/api/owner/deleteMember/${member._id}`, { method: 'DELETE' })
       const result = await response.json()
 
       if (!response.ok) {

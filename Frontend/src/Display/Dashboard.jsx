@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { apiUrl } from '../api.js'
+import { authFetch } from '../api.js'
 
 const statusStyles = {
   'In Transit': 'bg-slate-100 text-slate-700',
@@ -19,9 +19,7 @@ const Dashboard = () => {
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const profileResponse = await fetch(apiUrl('/api/auth/getProfile'), {
-          credentials: 'include',
-        })
+        const profileResponse = await authFetch('/api/auth/getProfile')
         const profileResult = await profileResponse.json()
 
         if (!profileResponse.ok) {
@@ -31,17 +29,12 @@ const Dashboard = () => {
         const isMember = profileResult.user?.role === 'Member'
         const requests = [
           
-          fetch(
-            apiUrl(`/api/${isMember ? 'member' : 'owner'}/shipments`),
-            { credentials: 'include' },
-          ),
+          authFetch(`/api/${isMember ? 'member' : 'owner'}/shipments`),
         ]
 
         if (!isMember) {
           requests.push(
-            fetch(apiUrl('/api/owner/getOrganizations'), {
-              credentials: 'include',
-            }),
+            authFetch('/api/owner/getOrganizations'),
           )
         }
 

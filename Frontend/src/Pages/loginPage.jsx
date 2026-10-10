@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
 import { apiUrl } from '../api.js'
+import { setToken } from '../token.js'
 
 const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -21,7 +22,6 @@ const LoginPage = () => {
     try {
       const response = await fetch(apiUrl('/api/auth/login'), {
         method: 'POST',
-        credentials:'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -37,6 +37,7 @@ const LoginPage = () => {
         throw new Error(result?.message || 'Unable to sign in. Check your email and password.')
       }
 
+      setToken(result.token)
       setMessage(result?.message || 'Signed in successfully.')
       navigate("/")
       form.reset()

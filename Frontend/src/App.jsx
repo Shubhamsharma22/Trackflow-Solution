@@ -11,7 +11,8 @@ import ShipmentPage from './Pages/ShipmentPage.jsx'
 import Organization from './Pages/Organization.jsx'
 import Side from './Components/Side.jsx'
 import { useEffect, useState } from 'react'
-import { apiUrl } from './api.js'
+import { authFetch } from './api.js'
+import { removeToken } from './token.js'
 
 const WorkspaceLayout = ({ children }) => {
   const navigate = useNavigate()
@@ -21,15 +22,15 @@ const WorkspaceLayout = ({ children }) => {
     setLogoutError('')
 
     try {
-      const response = await fetch(apiUrl('/api/auth/logout'), {
+      const response = await authFetch('/api/auth/logout', {
         method: 'POST',
-        credentials: 'include',
       })
 
       if (!response.ok) {
         throw new Error('Unable to log out. Please try again.')
       }
 
+      removeToken()
       navigate('/login')
     } catch (error) {
       setLogoutError(error.message)
@@ -70,9 +71,7 @@ const App = () => {
 
     async function fetchOrganizations() {
       try {
-        const profileResponse = await fetch(apiUrl('/api/auth/getProfile'), {
-          credentials: 'include',
-        })
+        const profileResponse = await authFetch('/api/auth/getProfile')
         const profileResult = await profileResponse.json()
 
         if (!profileResponse.ok) {
@@ -84,10 +83,7 @@ const App = () => {
           const organization = profileResult.user.Organization
           organizationList = organization && typeof organization === 'object' ? [organization] : []
         } else {
-          const organizationsResponse = await fetch(
-            apiUrl('/api/owner/getOrganizations'),
-            { credentials: 'include' },
-          )
+          const organizationsResponse = await authFetch('/api/owner/getOrganizations')
           const organizationsResult = await organizationsResponse.json()
 
           if (!organizationsResponse.ok) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { apiUrl } from '../api.js'
+import { authFetch } from '../api.js'
 
 
 const SideBar = ({ organizations, organizationError }) => {
@@ -25,9 +25,7 @@ const SideBar = ({ organizations, organizationError }) => {
 
     async function getOwners() {
       try {
-        const response = await fetch(apiUrl('/api/member/ownersWithOrganizations'), {
-          credentials: 'include',
-        })
+        const response = await authFetch('/api/member/ownersWithOrganizations')
         const result = await response.json()
 
         if (!response.ok) {
@@ -68,9 +66,8 @@ async function handleSubmit(event){
   }
 
   try {
-    const response = await fetch(apiUrl('/api/member/shipments'), {
+    const response = await authFetch('/api/member/shipments', {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

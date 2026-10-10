@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { apiUrl } from '../api.js'
+import { authFetch } from '../api.js'
 
 const CreateOrganization = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -22,9 +22,8 @@ const CreateOrganization = () => {
       .filter(Boolean)
 
     try {
-      const response = await fetch(apiUrl('/api/owner/createOrganization'), {
+      const response = await authFetch('/api/owner/createOrganization', {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
