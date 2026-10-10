@@ -6,34 +6,28 @@ import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
 dotenv.config()
 
-const LoginController=AsyncHandler(async(req,res)=>{
-    const {Email,password} = req.body
-    
-    if(!Email||!password) throw new ApiError(401,"Enter Valid Credentials")
-    
-        let loguser= await User.findOne({Email})
+const LoginController = AsyncHandler(async (req, res) => {
+  const { Email, password } = req.body
 
-        if(!loguser) throw new ApiError(401,"User Does not Exist")
+  if (!Email || !password) throw new ApiError(401, "Enter Valid Credentials")
 
-            const isvalid = await bcrypt.compare(password,loguser.password)
+  const loguser = await User.findOne({ Email })
+  if (!loguser) throw new ApiError(401, "User Does not Exist")
 
-            if(!isvalid) throw new ApiError(401,"Wrong Password")
+  const isvalid = await bcrypt.compare(password, loguser.password)
+  if (!isvalid) throw new ApiError(401, "Wrong Password")
 
-                const token = jwt.sign({
-                    id: loguser._id,
-                    Email: loguser.Email,
-                    UserName: loguser.UserName
-                }, process.env.JWT_Secret_Key, { expiresIn: "7d" })
+  const token = jwt.sign(
+    {
+      id: loguser._id,
+      Email: loguser.Email,
+      UserName: loguser.UserName,
+    },
+    process.env.JWT_Secret_Key,
+    { expiresIn: "7d" }
+  )
 
-                res.cookie("token", token, {
-                    httpOnly: true,
-                    sameSite: "none",
-                    secure: true,
-                    maxAge: 7 * 24 * 60 * 60 * 1000  // 7 days in ms
-                })
-
-                res.status(201).json({ message: "User Logged in" })
-
+  res.status(200).json({ message: "User Logged in", token })
 })
 
 export default LoginController

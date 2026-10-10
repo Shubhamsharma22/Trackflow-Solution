@@ -6,7 +6,6 @@ const DeleteProfileController = AsyncHandler(async (req, res) => {
   const deletedUser = await User.findByIdAndDelete(req.user.id);
   if (!deletedUser) throw new ApiError(404, "User not found");
 
-  res.clearCookie("token", { httpOnly: true });
   res.status(200).json({ message: "Profile deleted successfully" });
 });
 

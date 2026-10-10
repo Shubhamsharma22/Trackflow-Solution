@@ -1,6 +1,5 @@
 import express from "express"
 import cors from "cors"
-import cookieParser from "cookie-parser"
 import authRoutes from "./Routes/auth.Routes.js"
 import adminRoutes from "./Routes/admin.Routes.js"
 import ownerRoutes from "./Routes/owner.Routes.js"
@@ -49,7 +48,6 @@ const swaggerSpec = swaggerJsdoc({
 
 app.use(express.json())
 
-app.use(cookieParser())
 app.use(
     "/api-docs",
     swaggerUi.serve,
