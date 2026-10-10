@@ -23,7 +23,7 @@ const both =[isOwner||isMember]
  *     tags: [Shipments]
  *     summary: Get shipments belonging to the current owner's organizations
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Owner shipments retrieved successfully
@@ -37,7 +37,7 @@ ownerRoutes.get("/shipments", verificationToken, isOwner, getMyShipments)
  *     tags: [Organizations]
  *     summary: Create an organization for the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -61,7 +61,7 @@ ownerRoutes.post("/createOrganization",verificationToken,isOwner,createOrganizat
  *     tags: [Organizations]
  *     summary: Get organizations owned by the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Organizations retrieved successfully
@@ -75,7 +75,7 @@ ownerRoutes.get("/getOrganizations",verificationToken,getOrganizations)
  *     tags: [Organizations]
  *     summary: Get one organization owned by the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -97,7 +97,7 @@ ownerRoutes.get("/getOrganization/:id",verificationToken,isOwner,getOrganization
  *     tags: [Organizations]
  *     summary: Update an organization owned by the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -132,7 +132,7 @@ ownerRoutes.put("/updateOrganization/:id",verificationToken,isOwner,updateOrgani
  *     tags: [Organizations]
  *     summary: Delete an organization owned by the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -154,7 +154,7 @@ ownerRoutes.delete("/deleteOrganization/:id",verificationToken,isOwner,deleteOrg
  *     tags: [Members]
  *     summary: Get members in an organization owned by the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -176,7 +176,7 @@ ownerRoutes.get("/organizations/:id/members",verificationToken,isOwner,getMember
  *     tags: [Members]
  *     summary: Create a member in an organization owned by the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -208,7 +208,7 @@ ownerRoutes.post("/createMember",verificationToken,isOwner,createMember)
  *     tags: [Members]
  *     summary: Delete a member from an organization owned by the current owner
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id

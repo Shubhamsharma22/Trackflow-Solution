@@ -80,7 +80,7 @@ authRoute.post("/logout",LogoutController)
  *     tags: [Authentication]
  *     summary: Get the current user's profile
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Profile retrieved successfully
@@ -94,7 +94,7 @@ authRoute.get("/getProfile",verificationToken,GetProfileController)
  *     tags: [Authentication]
  *     summary: Update the current user's profile
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -119,7 +119,7 @@ authRoute.put("/updateProfile",verificationToken,UpdateProfileController)
  *     tags: [Authentication]
  *     summary: Delete the current user's profile
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Profile deleted successfully

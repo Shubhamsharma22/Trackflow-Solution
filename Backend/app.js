@@ -49,13 +49,18 @@ const swaggerSpec = swaggerJsdoc({
         },
         components: {
             securitySchemes: {
-                bearerAuth: {
-                    type: "http",
-                    scheme: "bearer",
-                    bearerFormat: "JWT",
+                cookieAuth: {
+                    type: "apiKey",
+                    in: "Cookie",
+                    name: "token",
                 },
             },
         },
+        security: [
+            {
+                cookieAuth: [],
+            },
+        ],
     },
     apis: ["./Routes/*.js"],
 })
@@ -66,7 +71,18 @@ const swaggerSpec = swaggerJsdoc({
 app.use(express.json())
 
 app.use(cookieParser())
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+        swaggerOptions: {
+            requestInterceptor: (req) => {
+                req.credentials = "include"; // Ensures cookies are dispatched with requests
+                return req;
+            },
+        },
+    })
+);
 
 app.use("/api/auth", authRoutes)
 app.use("/api/admin", adminRoutes)

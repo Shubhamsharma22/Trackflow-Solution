@@ -11,7 +11,7 @@ const trackingRoutes = express.Router();
  *     tags: [Tracking Events]
  *     summary: Get tracking events for a shipment the authenticated user can access
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id

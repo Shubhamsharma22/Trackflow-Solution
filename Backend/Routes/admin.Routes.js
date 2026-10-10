@@ -15,7 +15,7 @@ const adminRoutes = express.Router()
  *     tags: [Admin]
  *     summary: Create an owner account
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -43,7 +43,7 @@ adminRoutes.post("/createOwner",verificationToken,isAdmin,createOwner)
  *     tags: [Admin]
  *     summary: Update an owner account
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -78,7 +78,7 @@ adminRoutes.put("/updateOwner/:id",verificationToken,isAdmin,updateOwner)
  *     tags: [Admin]
  *     summary: Delete an owner account
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -100,7 +100,7 @@ adminRoutes.delete("/deleteOwner/:id",verificationToken,isAdmin,deleteOwner)
  *     tags: [Admin]
  *     summary: Get owners who have organizations
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Owners with organizations retrieved successfully

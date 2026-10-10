@@ -25,7 +25,7 @@ const memberRoutes = express.Router();
  *     tags: [Carriers]
  *     summary: Get carriers available to the current member
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Carriers retrieved successfully
@@ -39,7 +39,7 @@ memberRoutes.get("/carriers", verificationToken, isMember, getCarriers);
  *     tags: [Carriers]
  *     summary: Create a carrier
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -69,7 +69,7 @@ memberRoutes.post("/carriers", verificationToken, isMember, createCarrier);
  *     tags: [Carriers]
  *     summary: Update a carrier
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -104,7 +104,7 @@ memberRoutes.put("/carriers/:id", verificationToken, isMember, updateCarrier);
  *     tags: [Carriers]
  *     summary: Delete a carrier
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -126,7 +126,7 @@ memberRoutes.delete("/carriers/:id", verificationToken, isMember, deleteCarrier)
  *     tags: [Shipments]
  *     summary: Get shipments available to the current member
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: Shipments retrieved successfully
@@ -140,7 +140,7 @@ memberRoutes.get("/shipments", verificationToken, isMember, getMemberShipments);
  *     tags: [Shipments]
  *     summary: Create a shipment
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -181,7 +181,7 @@ memberRoutes.post("/shipments", verificationToken, isMember, validateShipment, c
  *     tags: [Shipments]
  *     summary: Update a shipment
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -209,7 +209,7 @@ memberRoutes.put("/shipments/:id", verificationToken, isMember, updateShipment);
  *     tags: [Shipments]
  *     summary: Delete a shipment
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -231,7 +231,7 @@ memberRoutes.delete("/shipments/:id", verificationToken, isMember, deleteShipmen
  *     tags: [Tracking Events]
  *     summary: Create a tracking event
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -264,7 +264,7 @@ memberRoutes.post("/tracking-events", verificationToken, isMember, createTrackin
  *     tags: [Tracking Events]
  *     summary: Update a tracking event
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -292,7 +292,7 @@ memberRoutes.put("/tracking-events/:id", verificationToken, isMember, updateTrac
  *     tags: [Tracking Events]
  *     summary: Delete a tracking event
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
