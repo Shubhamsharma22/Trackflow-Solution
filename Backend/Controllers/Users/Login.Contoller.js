@@ -20,18 +20,19 @@ const LoginController=AsyncHandler(async(req,res)=>{
             if(!isvalid) throw new ApiError(401,"Wrong Password")
 
                 const token = jwt.sign({
-                  id:loguser._id,
-                    Email:loguser.Email,
-                    UserName:loguser.UserName
-                },process.env.JWT_Secret_Key)
+                    id: loguser._id,
+                    Email: loguser.Email,
+                    UserName: loguser.UserName
+                }, process.env.JWT_Secret_Key, { expiresIn: "7d" })
 
-                res.cookie("token",token,{
-                    httpOnly:true,
-                    sameSite:"none",
-                    secure:true
+                res.cookie("token", token, {
+                    httpOnly: true,
+                    sameSite: "none",
+                    secure: true,
+                    maxAge: 7 * 24 * 60 * 60 * 1000  // 7 days in ms
                 })
 
-                res.status(201).json({message:"User Logged in",token})
+                res.status(201).json({ message: "User Logged in" })
 
 })
 
